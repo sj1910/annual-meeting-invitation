@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>龙马精神 · 2026美素佳儿苏州年会邀请</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-red: #d32f2f;
+            --gold: #ffc107;
+            --dark-red: #b71c1c;
+            --light-gold: #fff9c4;
+            --bg-color: #fff9f9;
+        }
+        
+        body {
+            font-family: 'Noto Serif SC', serif;
+            background-color: var(--bg-color);
+            color: #5a3921;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(255, 215, 0, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 80% 20%, rgba(211, 47, 47, 0.1) 0%, transparent 20%);
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* 封面部分 - 马年主题 */
+        .cover-section {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), 
+                        url('https://i.postimg.cc/kg1NY2SN/29991769668172.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: white;
+            overflow: hidden;
+        }
+        
+        .cover-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(211, 47, 47, 0.3) 0%, rgba(255, 193, 7, 0.2) 100%);
+            z-index: 1;
+        }
+        
+        .cover-content {
+            position: relative;
+            z-index: 2;
+            max-width: 90%;
+        }
+        
+        .horse-icon {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            font-size: 36px;
+            color: var(--gold);
+            transform: rotate(-15deg);
+            animation: horseTrot 3s infinite alternate;
+            z-index: 3;
+        }
+        
+        .year-title {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 4rem;
+            color: var(--gold);
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 0 var(--primary-red);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards 0.5s;
+        }
+        
+        .year-subtitle {
+            font-size: 1.8rem;
+            color: white;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards 0.8s;
+        }
+        
+        .company-name {
+            font-size: 2.5rem;
+            color: white;
+            margin: 20px 0;
+            padding: 15px 40px;
+            background: rgba(211, 47, 47, 0.8);
+            border-radius: 10px;
+            border: 3px solid var(--gold);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards 1.1s;
+        }
+        
+        .motto {
+            font-size: 2rem;
+            color: var(--gold);
+            font-weight: 700;
+            margin: 15px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards 1.4s;
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--gold);
+            font-size: 28px;
+            animation: bounce 2s infinite;
+            z-index: 3;
+        }
+        
+        /* 内容部分通用样式 */
+        .section {
+            padding: 60px 20px;
+            margin: 20px 0;
+            border-radius: 20px;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 10px 30px rgba(211, 47, 47, 0.1);
+            border: 3px solid var(--light-gold);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section:before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 20px;
+            background-color: var(--primary-red);
+            border-radius: 0 0 10px 10px;
+            z-index: 1;
+        }
+        
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .section-title {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 2.5rem;
+            color: var(--primary-red);
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, var(--gold), var(--primary-red), var(--gold));
+            border-radius: 2px;
+        }
+        
+        /* 图片展示区域 */
+        .image-showcase {
+            width: 100%;
+            max-width: 600px;
+            margin: 30px auto;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 5px solid var(--gold);
+        }
+        
+        .image-showcase img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s;
+        }
+        
+        .image-showcase img:hover {
+            transform: scale(1.03);
+        }
+        
+        .image-caption {
+            text-align: center;
+            margin-top: 15px;
+            font-style: italic;
+            color: var(--dark-red);
+            font-size: 1.1rem;
+        }
+        
+        /* 详情部分 */
+        .details-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .detail-card {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+            padding: 25px 20px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border: 2px solid var(--light-gold);
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .detail-card:before {
+            content: "🐎";
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5rem;
+            background: white;
+            padding: 0 10px;
+        }
+        
+        .detail-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(211, 47, 47, 0.15);
+        }
+        
+        .detail-icon {
+            font-size: 2.8rem;
+            color: var(--primary-red);
+            margin-bottom: 15px;
+        }
+        
+        .detail-title {
+            font-size: 1.5rem;
+            color: var(--dark-red);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .detail-content {
+            font-size: 1.2rem;
+            color: #5a3921;
+        }
+        
+        /* 活动亮点 */
+        .highlights-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .highlight-item {
+            background: linear-gradient(135deg, #fff, #fff9e6);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 5px solid var(--gold);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .highlight-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .highlight-icon {
+            font-size: 1.8rem;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        
+        .highlight-text {
+            font-size: 1.2rem;
+            color: #5a3921;
+        }
+        
+        /* 地图部分 */
+        .map-container {
+            height: 350px;
+            background-color: #f5f5f5;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-top: 20px;
+            border: 3px solid var(--light-gold);
+            position: relative;
+        }
+        
+        .map-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.9));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+        
+        .map-placeholder {
+            text-align: center;
+            padding: 20px;
+            color: var(--dark-red);
+        }
+        
+        .map-placeholder i {
+            font-size: 4rem;
+            color: var(--primary-red);
+            margin-bottom: 20px;
+        }
+        
+        .map-btn {
+            margin-top: 20px;
+            padding: 12px 30px;
+            background-color: var(--primary-red);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-family: inherit;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(211, 47, 47, 0.3);
+        }
+        
+        .map-btn:hover {
+            background-color: var(--dark-red);
+            transform: scale(1.05);
+        }
+        
+        /* 出行提示 */
+        .tips-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .tip-card {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            border-top: 5px solid var(--gold);
+        }
+        
+        .tip-title {
+            font-size: 1.5rem;
+            color: var(--primary-red);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .tip-title i {
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+        
+        .tip-content {
+            font-size: 1.1rem;
+            color: #5a3921;
+            line-height: 1.8;
+        }
+        
+        /* 倒计时部分 */
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: linear-gradient(135deg, var(--primary-red), var(--dark-red));
+            color: white;
+            padding: 25px 20px;
+            border-radius: 15px;
+            min-width: 100px;
+            box-shadow: 0 8px 20px rgba(211, 47, 47, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .countdown-item:before {
+            content: "🐴";
+            position: absolute;
+            bottom: -10px;
+            right: -10px;
+            font-size: 2rem;
+            opacity: 0.3;
+        }
+        
+        .countdown-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            font-family: 'Ma Shan Zheng', cursive;
+        }
+        
+        .countdown-label {
+            font-size: 1rem;
+            margin-top: 5px;
+        }
+        
+        /* 页脚 */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--primary-red);
+            font-size: 1.1rem;
+            border-top: 3px solid var(--light-gold);
+            margin-top: 40px;
+            background: linear-gradient(to bottom, #fff, #fff9e6);
+            border-radius: 0 0 20px 20px;
+        }
+        
+        .footer-note {
+            margin-top: 15px;
+            font-size: 1rem;
+            color: var(--dark-red);
+        }
+        
+        .footer-heart {
+            color: #ff4081;
+            font-size: 1.5rem;
+            margin: 0 5px;
+            animation: heartbeat 1.5s infinite;
+        }
+        
+        /* 动画定义 */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-15px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-7px) translateX(-50%);
+            }
+        }
+        
+        @keyframes horseTrot {
+            0%, 100% {
+                transform: rotate(-15deg) translateY(0);
+            }
+            50% {
+                transform: rotate(-15deg) translateY(-10px);
+            }
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .year-title {
+                font-size: 3rem;
+            }
+            
+            .company-name {
+                font-size: 1.8rem;
+                padding: 10px 20px;
+            }
+            
+            .motto {
+                font-size: 1.6rem;
+            }
+            
+            .section {
+                padding: 40px 15px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .detail-card {
+                min-width: 100%;
+            }
+            
+            .countdown-item {
+                min-width: 80px;
+                padding: 20px 15px;
+            }
+            
+            .countdown-value {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .year-title {
+                font-size: 2.5rem;
+            }
+            
+            .year-subtitle {
+                font-size: 1.4rem;
+            }
+            
+            .motto {
+                font-size: 1.3rem;
+            }
+            
+            .highlights-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .tip-card {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 封面部分 -->
+    <section class="cover-section">
+        <div class="horse-icon">
+            <i class="fas fa-horse-head"></i>
+        </div>
+        <div class="cover-content">
+            <h1 class="year-title">龙马精神</h1>
+            <p class="year-subtitle">2026美素佳儿苏州年会</p>
+            <div class="company-name">美素佳儿苏州全体同仁</div>
+            <div class="motto">美妈顾问向巅峰，亿马当先开门红</div>
+        </div>
+        
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+    
+    <div class="container">
+        <!-- 图片展示 -->
+        <section id="image-showcase" class="section">
+            <h2 class="section-title">年会风采</h2>
+            <div class="image-showcase">
+                <img src="https://i.postimg.cc/kg1NY2SN/29991769668172.jpg" alt="年会背景图片" id="main-image">
+            </div>
+            <p class="image-caption">龙马精神，共迎新春 | 美素佳儿苏州2026年度盛会</p>
+        </section>
+        
+        <!-- 开场致辞 -->
+        <section id="greeting" class="section">
+            <h2 class="section-title">致各位小伙伴</h2>
+            <div style="text-align: center; font-size: 1.3rem; line-height: 1.8; padding: 0 10px;">
+                <p>这一年🐎年感谢努力奋进的我们。</p>
+                <p>每一份的努力付出，都值得一场热气腾腾的相聚🍻。</p>
+                <p>为表感谢，公司特筹备了年会聚餐活动，</p>
+                <p>诚邀全体人员参加，策马扬鞭向新岁！</p>
+                <p style="font-weight: 700; color: var(--primary-red); margin-top: 20px;">这场欢聚缺一不可的你！</p>
+            </div>
+        </section>
+        
+        <!-- 年会详情 -->
+        <section id="details" class="section">
+            <h2 class="section-title">年会信息</h2>
+            
+            <div class="details-container">
+                <div class="detail-card">
+                    <div class="detail-icon">
+                        <i class="far fa-calendar-alt"></i>
+                    </div>
+                    <h3 class="detail-title">年会时间</h3>
+                    <p class="detail-content">2026年2月6日</p>
+                    <p class="detail-content">09:30 — 15:00</p>
+                </div>
+                
+                <div class="detail-card">
+                    <div class="detail-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3 class="detail-title">年会地点</h3>
+                    <p class="detail-content">苏浙徽农家大院</p>
+                    <p class="detail-content">2楼宴会厅</p>
+                    <p class="detail-content" style="font-size: 1rem;">苏州市相城区润元路387号</p>
+                </div>
+                
+                <div class="detail-card">
+                    <div class="detail-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="detail-title">参与人员</h3>
+                    <p class="detail-content">美素佳儿苏州</p>
+                    <p class="detail-content">全体同仁</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 活动亮点 -->
+        <section id="highlights" class="section">
+            <h2 class="section-title">精彩亮点</h2>
+            
+            <div class="highlights-container">
+                <div class="highlight-item">
+                    <span class="highlight-icon">✅</span>
+                    <span class="highlight-text">签到领礼 + 打卡出片📸</span>
+                </div>
+                <div class="highlight-item">
+                    <span class="highlight-icon">✅</span>
+                    <span class="highlight-text">表彰颁奖 + 才艺秀🎤</span>
+                </div>
+                <div class="highlight-item">
+                    <span class="highlight-icon">✅</span>
+                    <span class="highlight-text">互动游戏 + 幸运大抽奖🎁</span>
+                </div>
+                <div class="highlight-item">
+                    <span class="highlight-icon">✅</span>
+                    <span class="highlight-text">美食盛宴 + 自由畅聊🍻</span>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 倒计时 -->
+        <section id="countdown" class="section">
+            <h2 class="section-title">年会倒计时</h2>
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 20px;">龙马精神，蓄势待发！</p>
+            
+            <div class="countdown-container">
+                <div class="countdown-item">
+                    <span id="days" class="countdown-value">00</span>
+                    <span class="countdown-label">天</span>
+                </div>
+                <div class="countdown-item">
+                    <span id="hours" class="countdown-value">00</span>
+                    <span class="countdown-label">时</span>
+                </div>
+                <div class="countdown-item">
+                    <span id="minutes" class="countdown-value">00</span>
+                    <span class="countdown-label">分</span>
+                </div>
+                <div class="countdown-item">
+                    <span id="seconds" class="countdown-value">00</span>
+                    <span class="countdown-label">秒</span>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 地图位置 -->
+        <section id="location" class="section">
+            <h2 class="section-title">年会地点</h2>
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 10px;">苏浙徽农家大院2楼宴会厅</p>
+            <p style="text-align: center; color: var(--dark-red); margin-bottom: 20px;">苏州市相城区润元路387号</p>
+            
+            <div class="map-container">
+                <div class="map-overlay">
+                    <div class="map-placeholder">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <h3>年会地点导航地图</h3>
+                        <p>点击下方按钮查看详细位置和导航</p>
+                    </div>
+                    <button id="view-map-btn" class="map-btn">查看地图 & 导航</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 出行提示 -->
+        <section id="tips" class="section">
+            <h2 class="section-title">出行提示</h2>
+            <p style="text-align: center; margin-bottom: 30px;">温馨提示：准时赴约，穿搭亮眼👗 | 自驾早到，手机满电📱</p>
+            
+            <div class="tips-container">
+                <div class="tip-card">
+                    <h3 class="tip-title"><i class="fas fa-car"></i> 自驾出行</h3>
+                    <div class="tip-content">
+                        <p>导航地址：<strong>相城永金广场地下停车场</strong></p>
+                        <p>停车福利：扫码停车免费3小时</p>
+                        <p>建议提前到达，确保充足停车时间</p>
+                    </div>
+                </div>
+                
+                <div class="tip-card">
+                    <h3 class="tip-title"><i class="fas fa-subway"></i> 地铁出行</h3>
+                    <div class="tip-content">
+                        <p>乘坐<strong>苏州地铁2号线</strong>至<strong>陆慕站</strong></p>
+                        <p>从<strong>2号口</strong>出站后左转步行约8分钟</p>
+                        <p>沿途有指引标识，请注意查看</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px; padding: 20px; background-color: var(--light-gold); border-radius: 10px;">
+                <h3 style="color: var(--primary-red); margin-bottom: 10px;">💡 温馨提示</h3>
+                <p style="color: #5a3921;">建议绿色出行，提前规划路线，确保准时到达年会现场</p>
+            </div>
+        </section>
+        
+        <!-- 页脚 -->
+        <footer class="footer">
+            <p>期待与您共度精彩年会！</p>
+            <p class="footer-note">让我们以<span class="footer-heart">❤</span>龙马精神<span class="footer-heart">❤</span>，共赴这场年度盛宴！</p>
+            <p class="footer-note">© 2026 美素佳儿苏州年会 | 本邀请函最终解释权归公司所有</p>
+        </footer>
+    </div>
+
+    <script>
+        // 滚动显示动画
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.section');
+            
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+            
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            // 倒计时功能 - 设定为2026年2月6日 09:30
+            const eventDate = new Date('2026-02-06T09:30:00').getTime();
+            
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const timeLeft = eventDate - now;
+                
+                if (timeLeft < 0) {
+                    document.getElementById('days').textContent = '00';
+                    document.getElementById('hours').textContent = '00';
+                    document.getElementById('minutes').textContent = '00';
+                    document.getElementById('seconds').textContent = '00';
+                    
+                    // 如果活动已开始，显示提示
+                    if (timeLeft < -6*60*60*1000) { // 活动结束后6小时
+                        document.querySelector('#countdown p').textContent = '年会已圆满结束，感谢各位的参与！';
+                    } else if (timeLeft < 0) {
+                        document.querySelector('#countdown p').textContent = '年会正在进行中，期待您的到来！';
+                    }
+                    return;
+                }
+                
+                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                
+                document.getElementById('days').textContent = days < 10 ? '0' + days : days;
+                document.getElementById('hours').textContent = hours < 10 ? '0' + hours : hours;
+                document.getElementById('minutes').textContent = minutes < 10 ? '0' + minutes : minutes;
+                document.getElementById('seconds').textContent = seconds < 10 ? '0' + seconds : seconds;
+            }
+            
+            setInterval(updateCountdown, 1000);
+            updateCountdown();
+            
+            // 查看地图按钮
+            document.getElementById('view-map-btn').addEventListener('click', function() {
+                // 在实际应用中，这里可以链接到百度地图或高德地图
+                const address = encodeURIComponent('苏州市相城区润元路387号苏浙徽农家大院');
+                const mapUrl = `https://uri.amap.com/marker?position=120.612982,31.377446&name=苏浙徽农家大院&src=mypage&coordinate=gaode&callnative=1`;
+                
+                // 尝试打开地图APP，如果失败则显示提示
+                window.open(mapUrl, '_blank');
+                
+                // 显示详细地址信息
+                setTimeout(() => {
+                    alert(`详细地址：苏州市相城区润元路387号苏浙徽农家大院2楼宴会厅\n\n自驾：导航至"相城永金广场地下停车场"\n地铁：苏州地铁2号线陆慕站2号口出左转`);
+                }, 500);
+            });
+            
+            // 平滑滚动
+            document.querySelector('.scroll-indicator').addEventListener('click', function() {
+                document.getElementById('image-showcase').scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            // 添加马年元素动态效果
+            const horseIcon = document.querySelector('.horse-icon');
+            let gallopInterval;
+            
+            horseIcon.addEventListener('mouseenter', function() {
+                gallopInterval = setInterval(() => {
+                    horseIcon.style.transform = `rotate(${Math.random() * 30 - 15}deg) translateY(${Math.random() * 10 - 5}px)`;
+                }, 200);
+            });
+            
+            horseIcon.addEventListener('mouseleave', function() {
+                clearInterval(gallopInterval);
+                horseIcon.style.transform = 'rotate(-15deg)';
+                horseIcon.style.animation = 'horseTrot 3s infinite alternate';
+            });
+            
+            // 图片加载完成后的处理
+            const mainImage = document.getElementById('main-image');
+            mainImage.addEventListener('load', function() {
+                console.log('年会图片加载成功！');
+                // 可以在这里添加图片加载成功后的其他效果
+            });
+            
+            mainImage.addEventListener('error', function() {
+                console.log('图片加载失败，使用备用图片');
+                // 如果图片加载失败，使用备用图片
+                this.src = 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+                this.alt = '年会备用背景图片';
+            });
+            
+            // 添加页面加载时的马叫声（音效模拟）
+            setTimeout(() => {
+                console.log("🐎 龙马精神，年会倒计时开始！");
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
